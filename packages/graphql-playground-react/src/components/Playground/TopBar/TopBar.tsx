@@ -12,7 +12,7 @@ import {
   getIsPollingSchema,
 } from '../../../state/sessions/selectors'
 import { connect } from 'react-redux'
-import { getFixedEndpoint } from '../../../state/general/selectors'
+// import { getFixedEndpoint } from '../../../state/general/selectors'
 import * as PropTypes from 'prop-types'
 import {
   editEndpoint,
@@ -22,8 +22,7 @@ import {
 import { share } from '../../../state/sharing/actions'
 import { openHistory } from '../../../state/general/actions'
 import { getSettings } from '../../../state/workspace/reducers'
-import { ISettings } from '../../../types'
-import { Session } from '../../../state/sessions/reducers'
+import { ISettings, CopyOperations } from '../../../types'
 
 export interface Props {
   endpoint: string
@@ -38,7 +37,7 @@ export interface Props {
   openHistory: () => void
   share: () => void
   refetchSchema: () => void
-  copyAction?: (session: Session) => string
+  copyAction?: (ops: CopyOperations) => string
 
   settings: ISettings
 }
@@ -103,7 +102,12 @@ class TopBar extends React.Component<Props, {}> {
   copyToClipboard = () => {
     if (this.props.copyAction) {
       const session = getSelectedSession(this.context.store.getState())
-      const content = this.props.copyAction(session)
+      const content = this.props.copyAction({
+        operationName: session.operationName,
+        query: session.query,
+        variables: session.variables,
+        operations: session.operations.toJS(),
+      })
       copy(content)
     } else {
       const curl = this.getCurl()
@@ -164,7 +168,7 @@ class TopBar extends React.Component<Props, {}> {
 
 const mapStateToProps = createStructuredSelector({
   endpoint: getEndpoint,
-  fixedEndpoint: getFixedEndpoint,
+  // fixedEndpoint: getFixedEndpoint,
   isPollingSchema: getIsPollingSchema,
   endpointUnreachable: getEndpointUnreachable,
   settings: getSettings,

@@ -33,3 +33,10 @@ export interface ISettings {
   ['schema.polling.interval']: number
   ['tracing.hideTracingResponse']: boolean
 }
+
+export interface CopyOperations {
+  query: string
+  variables: string
+  operationName?: string
+  operations: any[]
+}

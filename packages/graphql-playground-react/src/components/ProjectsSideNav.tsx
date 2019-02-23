@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { GraphQLConfig, GraphQLConfigEnpointsMapData } from '../graphqlConfig'
 import ProjectsSideNavItem from './ProjectsSideNavItem'
-import { SettingsIcon, AddFullIcon } from './Icons'
+import { AddFullIcon } from './Icons'
 import { styled } from '../styled/index'
 import { getEndpointFromEndpointConfig } from './util'
 import { createStructuredSelector } from 'reselect'
@@ -41,12 +41,12 @@ class ProjectsSideNav extends React.Component<Props & ReduxProps, {}> {
           <div>
             <TitleRow>
               <Title>{folderName}</Title>
-              <SettingsIcon
+              {/* <SettingsIcon
                 width={18}
                 height={18}
                 onClick={this.props.openConfigTab}
                 title="Project settings"
-              />
+              /> */}
             </TitleRow>
             {endpoints && this.renderEndpoints(endpoints)}
             {projects &&

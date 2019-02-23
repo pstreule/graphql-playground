@@ -65,7 +65,8 @@ import {
   toggleVariables,
   fetchSchema,
 } from '../../state/sessions/actions'
-import { ResponseRecord, Session } from '../../state/sessions/reducers'
+import { ResponseRecord } from '../../state/sessions/reducers'
+import { CopyOperations } from '../../types'
 
 /**
  * The top-level React component for GraphQLEditor, intended to encompass the entire
@@ -78,7 +79,7 @@ export interface Props {
   fixedEndpoint?: boolean
   schema?: GraphQLSchema
   copyLabel?: string
-  copyAction?: (session: Session) => string
+  copyAction?: (ops: CopyOperations) => string
 }
 
 export interface ReduxProps {
@@ -203,7 +204,7 @@ class GraphQLEditor extends React.PureComponent<Props & ReduxProps> {
                   >
                     Query Variables
                   </VariableEditorSubtitle>
-                  <VariableEditorSubtitle
+                  {/* <VariableEditorSubtitle
                     isOpen={!this.props.queryVariablesActive}
                     ref={this.setHttpHeadersRef}
                     onClick={this.props.closeQueryVariables}
@@ -212,7 +213,7 @@ class GraphQLEditor extends React.PureComponent<Props & ReduxProps> {
                       (this.props.headersCount && this.props.headersCount > 0
                         ? `(${this.props.headersCount})`
                         : '')}
-                  </VariableEditorSubtitle>
+                  </VariableEditorSubtitle> */}
                 </VariableEditorTitle>
                 {this.props.queryVariablesActive ? (
                   <VariableEditorComponent

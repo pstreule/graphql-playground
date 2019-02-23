@@ -1,7 +1,7 @@
 import * as React from 'react'
 import GraphQLEditor from './Playground/GraphQLEditor'
 import TabBar from './Playground/TabBar'
-import { ISettings } from '../types'
+import { ISettings, CopyOperations } from '../types'
 import HistoryPopup from './HistoryPopup'
 import { styled } from '../styled'
 import Settings from './Settings'
@@ -93,7 +93,7 @@ export interface Props {
   workspaceName?: string
   schema?: GraphQLSchema
   copyLabel?: string
-  copyAction?: (session: Session) => string
+  copyAction?: (ops: CopyOperations) => string
 }
 
 export interface ReduxProps {

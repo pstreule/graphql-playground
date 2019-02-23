@@ -19,7 +19,7 @@ import {
 } from '../styled/theme'
 // import OldThemeProvider from './Theme/ThemeProvider'
 import { getActiveEndpoints } from './util'
-import { ISettings } from '../types'
+import { ISettings, CopyOperations } from '../types'
 import { connect } from 'react-redux'
 import { getTheme, getSettings } from '../state/workspace/reducers'
 import { Session, Tab } from '../state/sessions/reducers'
@@ -69,7 +69,7 @@ export interface PlaygroundWrapperProps {
   workspaceName?: string
   headers?: any
   copyLabel?: string
-  copyAction?: (session: Session) => string
+  copyAction?: (ops: CopyOperations) => string
 }
 
 export interface ReduxProps {

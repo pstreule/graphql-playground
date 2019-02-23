@@ -28,3 +28,5 @@ export * from './state/general/selectors'
 
 export * from './state/appHistory/actions'
 export * from './state/appHistory/reducers'
+
+export { CopyOperations } from './types'
