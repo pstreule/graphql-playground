@@ -23,6 +23,7 @@ import { share } from '../../../state/sharing/actions'
 import { openHistory } from '../../../state/general/actions'
 import { getSettings } from '../../../state/workspace/reducers'
 import { ISettings } from '../../../types'
+import { Session } from '../../../state/sessions/reducers'
 
 export interface Props {
   endpoint: string
@@ -30,12 +31,14 @@ export interface Props {
   fixedEndpoint?: boolean
   isPollingSchema: boolean
   endpointUnreachable: boolean
+  copyLabel?: string
 
   editEndpoint: (value: string) => void
   prettifyQuery: () => void
   openHistory: () => void
   share: () => void
   refetchSchema: () => void
+  copyAction?: (session: Session) => string
 
   settings: ISettings
 }
@@ -86,7 +89,9 @@ class TopBar extends React.Component<Props, {}> {
             </div>
           )}
         </UrlBarWrapper>
-        <Button onClick={this.copyCurlToClipboard}>Copy CURL</Button>
+        <Button onClick={this.copyToClipboard}>
+          {this.props.copyLabel || 'Copy Foo'}
+        </Button>
         {this.props.shareEnabled && (
           <Share>
             <Button>Share Playground</Button>
@@ -95,9 +100,15 @@ class TopBar extends React.Component<Props, {}> {
       </TopBarWrapper>
     )
   }
-  copyCurlToClipboard = () => {
-    const curl = this.getCurl()
-    copy(curl)
+  copyToClipboard = () => {
+    if (this.props.copyAction) {
+      const session = getSelectedSession(this.context.store.getState())
+      const content = this.props.copyAction(session)
+      copy(content)
+    } else {
+      const curl = this.getCurl()
+      copy(curl)
+    }
   }
   onChange = e => {
     this.props.editEndpoint(e.target.value)

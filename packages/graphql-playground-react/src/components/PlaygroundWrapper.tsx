@@ -68,6 +68,8 @@ export interface PlaygroundWrapperProps {
   codeTheme?: EditorColours
   workspaceName?: string
   headers?: any
+  copyLabel?: string
+  copyAction?: (session: Session) => string
 }
 
 export interface ReduxProps {
@@ -403,6 +405,8 @@ class PlaygroundWrapper extends React.Component<
               }
               createApolloLink={this.props.createApolloLink}
               schema={this.state.schema}
+              copyLabel={this.props.copyLabel}
+              copyAction={this.props.copyAction}
             />
           </App>
         </ThemeProvider>

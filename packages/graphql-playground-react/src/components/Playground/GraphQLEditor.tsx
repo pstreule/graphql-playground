@@ -65,7 +65,7 @@ import {
   toggleVariables,
   fetchSchema,
 } from '../../state/sessions/actions'
-import { ResponseRecord } from '../../state/sessions/reducers'
+import { ResponseRecord, Session } from '../../state/sessions/reducers'
 
 /**
  * The top-level React component for GraphQLEditor, intended to encompass the entire
@@ -77,6 +77,8 @@ export interface Props {
   shareEnabled?: boolean
   fixedEndpoint?: boolean
   schema?: GraphQLSchema
+  copyLabel?: string
+  copyAction?: (session: Session) => string
 }
 
 export interface ReduxProps {
@@ -171,6 +173,8 @@ class GraphQLEditor extends React.PureComponent<Props & ReduxProps> {
           <TopBar
             shareEnabled={this.props.shareEnabled}
             fixedEndpoint={this.props.fixedEndpoint}
+            copyLabel={this.props.copyLabel}
+            copyAction={this.props.copyAction}
           />
           <EditorBar
             ref={this.setEditorBarComponent}

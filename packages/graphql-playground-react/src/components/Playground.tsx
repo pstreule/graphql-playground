@@ -92,6 +92,8 @@ export interface Props {
   ) => ApolloLink
   workspaceName?: string
   schema?: GraphQLSchema
+  copyLabel?: string
+  copyAction?: (session: Session) => string
 }
 
 export interface ReduxProps {
@@ -315,6 +317,8 @@ export class Playground extends React.PureComponent<Props & ReduxProps, State> {
                 shareEnabled={this.props.shareEnabled}
                 fixedEndpoint={this.props.fixedEndpoint}
                 schema={this.state.schema}
+                copyLabel={this.props.copyLabel}
+                copyAction={this.props.copyAction}
               />
             )}
           </GraphiqlWrapper>
